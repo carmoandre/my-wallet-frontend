@@ -20,14 +20,14 @@ export default function Login() {
     );
 
     const localStorageUser = localStorage.getItem("user");
-    /*
+
     useEffect(() => {
         if (localStorageUser) {
             setUser(JSON.parse(localStorageUser));
             history.push("/transactions");
         }
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-    */
+
     function logUser(event) {
         event.preventDefault();
 
@@ -40,7 +40,6 @@ export default function Login() {
             body
         );
         request.then((response) => {
-            console.log(response);
             setUser(response.data);
             const stringUser = JSON.stringify(response.data);
             localStorage.setItem("user", stringUser);

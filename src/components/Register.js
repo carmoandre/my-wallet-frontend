@@ -39,7 +39,6 @@ export default function Register() {
             body
         );
         request.then((response) => {
-            console.log(response);
             setDisabled(false);
             history.push("/");
         });

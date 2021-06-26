@@ -4,8 +4,9 @@ import { Link, useHistory } from "react-router-dom";
 import { useState, useContext } from "react";
 import Loader from "react-loader-spinner";
 import UserContext from "../contexts/UserContext";
-import { GenericInput } from "./reusable/GenericInput";
+import { GenericInput, FormatedValueInput } from "./reusable/GenericInput";
 import { GenericButton } from "./reusable/GenericButton";
+import CurrencyInput from "react-currency-masked-input";
 
 export default function NewTransaction({ action }) {
     const [value, setValue] = useState("");
@@ -27,7 +28,7 @@ export default function NewTransaction({ action }) {
             },
         };
 
-        const body = { value, description, tipe: action };
+        const body = { value, description, type: action };
 
         const request = axios.post(
             "http://localhost:4000/mywallet/new-transaction",
@@ -52,14 +53,16 @@ export default function NewTransaction({ action }) {
         <FlexEffect>
             <Title>{`Nova ${action}`}</Title>
             <Form onSubmit={submitTransaction}>
-                <GenericInput
-                    type="number"
-                    placeholder="Valor"
-                    required
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                    disabled={disabled}
-                />
+                <FormatedValueInput>
+                    <CurrencyInput
+                        type="number"
+                        placeholder="Valor"
+                        required
+                        value={value}
+                        onChange={(e) => setValue(e.target.value)}
+                        disabled={disabled}
+                    ></CurrencyInput>
+                </FormatedValueInput>
                 <GenericInput
                     type="text"
                     placeholder="Descrição"
@@ -67,7 +70,7 @@ export default function NewTransaction({ action }) {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     disabled={disabled}
-                    //falta limitação do campo a 30 caracterres
+                    maxLength="20"
                 />
                 <GenericButton type="submit" disabled={disabled}>
                     {disabled ? loadEffect : `Salvar ${action}`}

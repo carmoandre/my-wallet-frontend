@@ -5,6 +5,7 @@ import UserContext from "../contexts/UserContext";
 import Login from "./Login";
 import Register from "./Register";
 import NewTransaction from "./NewTransaction";
+import ShowTransactions from "./ShowTransactions";
 
 export default function App() {
     const [user, setUser] = useState(null);
@@ -20,6 +21,9 @@ export default function App() {
                     </Route>
                     <Route path="/register" exact>
                         <Register />
+                    </Route>
+                    <Route path="/transactions" exact>
+                        <ShowTransactions />
                     </Route>
                     <Route path="/new-credit" exact>
                         <NewTransaction action={"entrada"} />
