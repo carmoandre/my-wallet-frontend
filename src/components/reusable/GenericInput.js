@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import CurrencyInput from "react-currency-masked-input";
 
 const GenericInput = styled.input`
     padding: 0 15px;
@@ -16,25 +17,19 @@ const GenericInput = styled.input`
     }
 `;
 
-const FormatedValueInput = styled.div`
-    width: 100%;
+const FormatedValueInput = styled(CurrencyInput)`
     padding: 0 15px;
+    width: 100%;
+    height: 58px;
     border-radius: 5px;
+    border: none;
     margin-bottom: 13px;
-    background-color: #fff;
+    font-size: 20px;
+    color: #000;
+    outline: none;
 
-    input {
-        width: 100%;
-        height: 100%;
-        height: 58px;
-        border: none;
-        font-size: 20px;
+    &::placeholder {
         color: #000;
-        outline: none;
-
-        &::placeholder {
-            color: #000;
-        }
     }
 `;
 

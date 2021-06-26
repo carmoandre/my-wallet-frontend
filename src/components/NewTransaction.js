@@ -6,7 +6,6 @@ import Loader from "react-loader-spinner";
 import UserContext from "../contexts/UserContext";
 import { GenericInput, FormatedValueInput } from "./reusable/GenericInput";
 import { GenericButton } from "./reusable/GenericButton";
-import CurrencyInput from "react-currency-masked-input";
 
 export default function NewTransaction({ action }) {
     const [value, setValue] = useState("");
@@ -18,7 +17,6 @@ export default function NewTransaction({ action }) {
     const loadEffect = (
         <Loader type="ThreeDots" color="#fff" height={45} width={80} />
     );
-
     function submitTransaction(event) {
         event.preventDefault();
 
@@ -28,7 +26,12 @@ export default function NewTransaction({ action }) {
             },
         };
 
-        const body = { value, description, type: action };
+        const body = {
+            value: parseInt(value * 1000),
+            description,
+            type: action,
+        };
+        console.log(body);
 
         const request = axios.post(
             "http://localhost:4000/mywallet/new-transaction",
@@ -53,16 +56,13 @@ export default function NewTransaction({ action }) {
         <FlexEffect>
             <Title>{`Nova ${action}`}</Title>
             <Form onSubmit={submitTransaction}>
-                <FormatedValueInput>
-                    <CurrencyInput
-                        type="number"
-                        placeholder="Valor"
-                        required
-                        value={value}
-                        onChange={(e) => setValue(e.target.value)}
-                        disabled={disabled}
-                    ></CurrencyInput>
-                </FormatedValueInput>
+                <FormatedValueInput
+                    type="number"
+                    placeholder="Valor"
+                    required
+                    onChange={(e) => setValue(e.target.value)}
+                    disabled={disabled}
+                ></FormatedValueInput>
                 <GenericInput
                     type="text"
                     placeholder="Descrição"

@@ -91,6 +91,7 @@ export default function ShowTransactions() {
                         <p>entrada ou saída</p>
                     </EmptyHolder>
                 )}
+                <DistanceForBalance />
                 <Balance total={total}>
                     <p>SALDO</p>
                     <p>
@@ -160,6 +161,7 @@ const TransactionsField = styled.div`
     border-radius: 5px;
     width: 100%;
     height: 100%;
+    max-height: 446px;
     padding: 23px 11px 10px 12px;
     position: relative;
 `;
@@ -198,8 +200,9 @@ const AddDebitIcon = styled(AiOutlineMinusCircle)`
 const TransactionsHolder = styled.div`
     display: flex;
     flex-direction: column;
+    height: 100%;
+    max-height: calc(446px - 62px);
     overflow-y: scroll;
-    padding-bottom: 35px;
 `;
 
 const EmptyHolder = styled.div`
@@ -223,6 +226,7 @@ const Balance = styled.div`
     position: absolute;
     bottom: 10px;
     left: 10px;
+    border-radius: 5px;
 
     & > p:first-child {
         font-weight: 700;
@@ -231,4 +235,9 @@ const Balance = styled.div`
     & > p:nth-child(2) {
         color: ${(props) => (props.total > 0 ? "#03AC00" : "#C70000")};
     }
+`;
+
+const DistanceForBalance = styled.div`
+    height: 38px;
+    background-color: #fff;
 `;
